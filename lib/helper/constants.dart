@@ -4,11 +4,6 @@ import 'package:shake_shack/helper/size_config.dart';
 import 'asset_images.dart';
 import 'colors.dart';
 
-
-
-
-
-
 const kAnimationDuration = Duration(milliseconds: 2500);
 
 final headingStyle = TextStyle(
@@ -17,8 +12,28 @@ final headingStyle = TextStyle(
   color: Colors.black,
   height: 1.5,
 );
+final otpInputDecoration = InputDecoration(
+  hintText: "Please enter Instructions",
+  hintStyle: const TextStyle(
+    fontFamily: 'Futura',
+    fontSize: 14,
+    color: Color(0xffffffff),
+    fontWeight: FontWeight.w500,
+  ),
+  contentPadding: EdgeInsets.symmetric(
+      vertical: getProportionateScreenWidth(15),
+      horizontal: getProportionateScreenWidth(10)),
+  border: outlineInputBorder(),
+  focusedBorder: outlineInputBorder(),
+  enabledBorder: outlineInputBorder(),
+);
 
-
+OutlineInputBorder outlineInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
+    borderSide: BorderSide(color: AppConfig.colors.borderColor),
+  );
+}
 
 class AppConfig {
   static AssetImages images = AssetImages();
@@ -39,17 +54,5 @@ class AppConfig {
 // const String kPhoneNumberNullError = "Please Enter your phone number";
 // const String kAddressNullError = "Please Enter your address";
 //
-// final otpInputDecoration = InputDecoration(
-//   contentPadding:
-//       EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),
-//   border: outlineInputBorder(),
-//   focusedBorder: outlineInputBorder(),
-//   enabledBorder: outlineInputBorder(),
-// );
-//
-// OutlineInputBorder outlineInputBorder() {
-//   return OutlineInputBorder(
-//     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
-//     borderSide: BorderSide(color: kTextColor),
-//   );
+
 // }

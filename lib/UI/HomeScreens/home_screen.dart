@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shake_shack/UI/HomeScreens/product_card.dart';
-import 'package:shake_shack/components/categories.dart';
+import 'package:shake_shack/UI/HomeScreens/components/product_card.dart';
 import 'package:shake_shack/helper/constants.dart';
 import 'package:shake_shack/helper/size_config.dart';
 import 'package:shake_shack/modelClasses/products.dart';
 
-import 'most_order.dart';
+import 'components/categories.dart';
+import 'components/floating_bar.dart';
+import 'components/most_order.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -67,21 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Container(
-          margin: const EdgeInsets.all(20),
-          height: getProportionateScreenHeight(64),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25.0),
-            color: AppConfig.colors.darkPrimaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: AppConfig.colors.darkPrimaryColor.withOpacity(0.30),
-                offset: const Offset(0, 0),
-                blurRadius: 10,
-              ),
-            ],
-          ),
-        ));
+        floatingActionButton: const FloatingBar());
   }
 
   Widget customAppBar() {

@@ -4,22 +4,33 @@ import 'package:shake_shack/provider/app_provider.dart';
 import 'package:shake_shack/helper/theme.dart';
 
 import 'UI/splash_screen.dart';
+import 'helper/connectivity_services.dart';
 import 'helper/routes.dart';
 
 void main() {
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final ConnectivityServices _con = ConnectivityServices();
+  @override
+  void initState() {
+    _con.startConnectionStream();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
+    return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AppProvider()),
-
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
