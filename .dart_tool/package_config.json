@@ -116,6 +116,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "http",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
@@ -136,6 +148,12 @@
     {
       "name": "meta",
       "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "modal_progress_hud_nsn",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/modal_progress_hud_nsn-0.1.0-nullsafety-1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -230,7 +248,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-11-27T15:14:13.995561Z",
+  "generated": "2021-11-28T01:22:47.920268Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

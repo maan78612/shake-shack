@@ -65,20 +65,23 @@ class CategoryCard extends StatelessWidget {
           margin: EdgeInsets.only(right: getProportionateScreenWidth(20)),
           padding: EdgeInsets.all(getProportionateScreenWidth(15)),
           decoration: BoxDecoration(
-              color: app.selectedCategory != index
+              color: !app.selectedCategory.contains(index)
                   ? AppConfig.colors.brightPrimaryColor
                   : const Color(0xFFE9F4E6),
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                  color: app.selectedCategory == index
+                  color: app.selectedCategory.contains(index)
                       ? const Color(0xFF55A335)
                       : AppConfig.colors.darkPrimaryColor,
                   width: 1.5)),
-          child: Image.asset(icon!,
-              fit: BoxFit.contain,
-              color: app.selectedCategory == index
-                  ? const Color(0xFF55A335)
-                  : AppConfig.colors.darkPrimaryColor),
+          child: SizedBox(
+            height: getProportionateScreenWidth(30),
+            child: Image.asset(icon!,
+                fit: BoxFit.contain,
+                color: app.selectedCategory.contains(index)
+                    ? const Color(0xFF55A335)
+                    : AppConfig.colors.darkPrimaryColor),
+          ),
         ),
       );
     });

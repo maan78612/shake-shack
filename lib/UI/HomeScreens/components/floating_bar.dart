@@ -62,7 +62,7 @@ class FloatingBar extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(top: 4),
                                           child: Image.asset(
-                                            cartData.product.images,
+                                            cartData.product.image ?? "",
                                             alignment: Alignment.center,
                                           ),
                                         ),

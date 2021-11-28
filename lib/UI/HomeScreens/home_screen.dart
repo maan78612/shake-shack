@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 import 'package:shake_shack/UI/HomeScreens/components/product_card.dart';
 import 'package:shake_shack/helper/constants.dart';
 import 'package:shake_shack/helper/size_config.dart';
-import 'package:shake_shack/modelClasses/products.dart';
+import 'package:shake_shack/modelClasses/products_modall.dart';
+import 'package:shake_shack/provider/app_provider.dart';
 
 import 'components/categories.dart';
 import 'components/floating_bar.dart';
@@ -19,56 +22,92 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var scaffoldKey1 = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      Provider.of<AppProvider>(context, listen: false).getProducts();
+    });
+    super.initState();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        key: scaffoldKey1,
-        extendBody: true,
-        backgroundColor: AppConfig.colors.brightPrimaryColor,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-          child: customAppBar(),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(children: [
-              const SizedBox(height: 10),
-              const Categories(),
-              Image.asset(AppConfig.images.banner),
-              MostOrder(
-                  product: demoProducts
-                      .firstWhere((element) => element.isMostOrder == true)),
-              SizedBox(height: getProportionateScreenHeight(60)),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                width: SizeConfig.screenWidth,
-                // height: SizeConfig.screenHeight,
-                child: CustomScrollView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  clipBehavior: Clip.none,
-                  slivers: [
-                    SliverGrid.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 60,
-                      crossAxisSpacing: 20.0,
-                      childAspectRatio: 0.88,
-                      children: List.generate(demoProducts.length - 1, (index) {
-                        Product data = demoProducts
-                            .where((element) => element.isMostOrder != true)
-                            .toList()[index];
-                        return ProductCard(product: data);
-                      }),
-                    )
-                  ],
-                ),
-              ),
-            ]),
+    return Consumer<AppProvider>(builder: (context, app, _) {
+      return Scaffold(
+          key: scaffoldKey1,
+          extendBody: true,
+          backgroundColor: AppConfig.colors.brightPrimaryColor,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+            child: customAppBar(),
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: const FloatingBar());
+          body: ModalProgressHUD(
+            inAsyncCall: app.isLoading,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  const SizedBox(height: 10),
+                  const Categories(),
+                  Image.asset(AppConfig.images.banner),
+                  if ((app.productList.data?.length ?? 0) != 0)
+                    MostOrder(
+                        product: app.productList.data!.firstWhere(
+                            (element) => element.isMostOrder == true)),
+                  SizedBox(height: getProportionateScreenHeight(60)),
+                  (app.productList.data?.length ?? 0) != 0
+                      ? gridView(app)
+                      : Center(
+                          child: Text(
+                            "No product to show",
+                            style: TextStyle(
+                              fontFamily: 'Futura',
+                              fontSize: getProportionateScreenWidth(20),
+                              color: AppConfig.colors.appPrimaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                ]),
+              ),
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: const FloatingBar());
+    });
+  }
+
+  Container gridView(AppProvider app) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      width: SizeConfig.screenWidth,
+      // height: SizeConfig.screenHeight,
+      child: CustomScrollView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        clipBehavior: Clip.none,
+        slivers: [
+          SliverGrid.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 60,
+            crossAxisSpacing: 20.0,
+            childAspectRatio: 0.88,
+            children: List.generate(
+                app.productList.data
+                        ?.where((element) => element.isMostOrder != true)
+                        .length ??
+                    0, (index) {
+              Data data = app.productList.data!
+                  .where((element) => element.isMostOrder != true)
+                  .toList()[index];
+              return ProductCard(product: data);
+            }),
+          )
+        ],
+      ),
+    );
   }
 
   Widget customAppBar() {

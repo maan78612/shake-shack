@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shake_shack/UI/ProductDetailScreen/product_detail.dart';
 import 'package:shake_shack/helper/constants.dart';
 import 'package:shake_shack/helper/size_config.dart';
-import 'package:shake_shack/modelClasses/products.dart';
+import 'package:shake_shack/modelClasses/products_modall.dart';
 import 'package:shake_shack/provider/app_provider.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  ProductCard({
     Key? key,
     this.width = 120,
     this.aspectRetio = 1.4,
@@ -14,17 +15,17 @@ class ProductCard extends StatelessWidget {
   }) : super(key: key);
 
   final double width, aspectRetio;
-  final Product product;
+  Data product;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, app, _) {
       return GestureDetector(
-        // onTap: () => Navigator.pushNamed(
-        //   context,
-        //   DetailsScreen.routeName,
-        //   arguments: ProductDetailsArguments(product: product),
-        // ),
+        onTap: () => Navigator.pushNamed(
+          context,
+          ProductDetailsPage.routeName,
+          arguments: product,
+        ),
         child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.center,
@@ -51,7 +52,7 @@ class ProductCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product.title,
+                          product.title ?? "",
                           style: TextStyle(
                             fontFamily: 'Futura',
                             fontSize: getProportionateScreenWidth(14),
@@ -61,7 +62,7 @@ class ProductCard extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          product.oneLiner,
+                          product.oneLiner ?? "",
                           style: TextStyle(
                             fontFamily: 'Futura',
                             fontSize: getProportionateScreenWidth(11),
@@ -107,12 +108,12 @@ class ProductCard extends StatelessWidget {
                                   width: getProportionateScreenWidth(25),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: product.isFavourite
+                                    color: product.isFavourite ?? false
                                         ? AppConfig.colors.appPrimaryColor
                                         : AppConfig.colors.darkPrimaryColor,
                                   ),
                                   child: Icon(
-                                      product.isFavourite
+                                      product.isFavourite ?? false
                                           ? Icons.favorite
                                           : Icons.favorite_border,
                                       size: 13,
@@ -131,8 +132,8 @@ class ProductCard extends StatelessWidget {
             ),
             Positioned(
               top: -getProportionateScreenWidth(55),
-              child: Image.asset(
-                product.images,
+              child: Image.network(
+                product.image ?? "",
                 fit: BoxFit.cover,
                 width: getProportionateScreenWidth(190),
                 height: getProportionateScreenWidth(190),

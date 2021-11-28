@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shake_shack/UI/splash_screen.dart';
 import 'package:shake_shack/helper/constants.dart';
@@ -11,6 +11,8 @@ import 'package:shake_shack/helper/size_config.dart';
 import 'package:shake_shack/provider/app_provider.dart';
 
 class NoInternetScreen extends StatefulWidget {
+  const NoInternetScreen({Key? key}) : super(key: key);
+
   @override
   _NoInternetScreenState createState() => _NoInternetScreenState();
 }
@@ -33,7 +35,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
         isChecking = false;
       });
     } on PlatformException catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -101,7 +103,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
           ),
         ),
         body: Container(
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -130,7 +132,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
               ),
               Expanded(
                   child: isChecking
-                      ? SizedBox(
+                      ? const SizedBox(
                           height: 50,
                           width: 50,
                           child: CircularProgressIndicator(),
@@ -150,13 +152,13 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
+            margin: const EdgeInsets.symmetric(horizontal: 24),
             child: GestureDetector(
               onTap: () {
                 initConnectivity();
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.center,
                 width: SizeConfig.screenWidth * 0.8,
                 height: SizeConfig.screenHeight * 0.06,
@@ -183,7 +185,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       "Retry",
                       style: TextStyle(color: Colors.white, fontSize: 18),

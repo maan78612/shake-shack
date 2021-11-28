@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
+
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:shake_shack/UI/no_Internet.dart';
 
 class ConnectivityServices {
@@ -10,6 +12,7 @@ class ConnectivityServices {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
+  late BuildContext context;
   Future<void> initConnectivity() async {
     late ConnectivityResult result;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -17,7 +20,7 @@ class ConnectivityServices {
       result = await _connectivity.checkConnectivity();
       if (result != ConnectivityResult.none) {}
     } on PlatformException catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
     // if (!mounted) {
     //   return Future.value(null);
@@ -48,7 +51,8 @@ class ConnectivityServices {
               fontSize: 14,
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER);
-          Get.to(NoInternetScreen());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => NoInternetScreen()));
           hasConnection() => false;
         }
         break;
@@ -62,12 +66,13 @@ class ConnectivityServices {
     print(result);
   }
 
-  void startConnectionStream() {
+  void startConnectionStream(BuildContext cntxt) {
+    context = cntxt;
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   void stopStream() {
-    _connectivitySubscription?.cancel();
+    _connectivitySubscription.cancel();
   }
 }

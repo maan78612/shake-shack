@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shake_shack/provider/app_provider.dart';
 import 'package:shake_shack/helper/theme.dart';
+import 'package:shake_shack/provider/app_provider.dart';
 
 import 'UI/splash_screen.dart';
-import 'helper/connectivity_services.dart';
 import 'helper/routes.dart';
 
 void main() {
@@ -19,10 +18,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final ConnectivityServices _con = ConnectivityServices();
   @override
   void initState() {
-    _con.startConnectionStream();
     super.initState();
   }
 

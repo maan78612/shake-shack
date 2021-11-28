@@ -42,7 +42,7 @@ class ItemCard extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Futura',
                       fontSize: getProportionateScreenWidth(12),
-                      color: Color(0xff55a335),
+                      color: const Color(0xff55a335),
                       fontWeight: FontWeight.w700,
                     ),
                     textAlign: TextAlign.left,
@@ -58,8 +58,8 @@ class ItemCard extends StatelessWidget {
                       color: Colors.transparent),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 4),
-                    child: Image.asset(
-                      cartData.product.images,
+                    child: Image.network(
+                      cartData.product.image ?? "",
                       alignment: Alignment.center,
                     ),
                   ),
@@ -68,7 +68,7 @@ class ItemCard extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Text(
-              cartData.product.title,
+              cartData.product.title ?? "",
               style: TextStyle(
                 fontFamily: 'Futura',
                 fontSize: getProportionateScreenWidth(15),
