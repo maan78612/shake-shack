@@ -69,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
+                  const SizedBox(height: 120)
                 ]),
               ),
             ),
@@ -81,7 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container gridView(AppProvider app) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
       width: SizeConfig.screenWidth,
       // height: SizeConfig.screenHeight,
       child: CustomScrollView(

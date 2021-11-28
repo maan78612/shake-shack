@@ -10,9 +10,11 @@ class AssetImages {
   String category4 = "assets/images/category4.png";
   String category5 = "assets/images/category5.png";
   String banner = "assets/images/banner.png";
-  String mostOrdered = "assets/images/mostOrdered.png";
-  String burger1 = "assets/images/burger1.png";
-  String burger2 = "assets/images/burger2.png";
-  String burger3 = "assets/images/burger3.png";
-  String burger4 = "assets/images/burger4.png";
+  String ingredient1 = "assets/images/ingredient1.png";
+  String ingredient2 = "assets/images/ingredient2.png";
+  String ingredient3 = "assets/images/ingredient3.png";
+  String ingredient4 = "assets/images/ingredient4.png";
+  String ingredient5 = "assets/images/ingredient5.png";
+  String ingredient6 = "assets/images/ingredient6.png";
+  String noInternet = "assets/gifs/no_internet_gif.gif";
 }

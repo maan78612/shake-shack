@@ -8,7 +8,7 @@ import 'package:shake_shack/modelClasses/products_modall.dart';
 class AppProvider extends ChangeNotifier {
   List<int> selectedCategory = [];
   double cartTotal = 0;
-  Product productList = Product(message: '', data: []);
+  Product productList = Product();
 
   void selectCategory(int index) {
     selectedCategory.clear();
@@ -80,11 +80,8 @@ class AppProvider extends ChangeNotifier {
     productList = Product.fromJson({});
     productList.data = [];
     startLoading();
-    productList = (await HomeServices.getProducts(productList, Get.context))!;
-    print("================= \n");
-    print(productList.toJson());
-    print(productList.data?.length ?? 0);
-    print("================= \n");
+    productList = await HomeServices.getProducts(productList, Get.context) ??
+        Product.fromJson({});
 
     endLoading();
     notifyListeners();

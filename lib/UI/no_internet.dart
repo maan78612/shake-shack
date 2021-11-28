@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shake_shack/UI/HomeScreens/home_screen.dart';
 import 'package:shake_shack/UI/splash_screen.dart';
 import 'package:shake_shack/helper/constants.dart';
 import 'package:shake_shack/helper/size_config.dart';
@@ -54,7 +55,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
     if (isConnected) {
       Navigator.of(context).popUntil((predicate) => predicate.isFirst);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SplashScreen()),
+        new MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }
   }
@@ -203,7 +204,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
   static Widget noInternetWidget({double scale = 2}) {
     return Center(
         child: Image.asset(
-      "assets/gifs/no_internet_gif.gif",
+      AppConfig.images.noInternet,
       scale: scale,
     ));
   }

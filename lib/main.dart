@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shake_shack/helper/theme.dart';
 import 'package:shake_shack/provider/app_provider.dart';
 
 import 'UI/splash_screen.dart';
+import 'helper/connectivity_services.dart';
 import 'helper/routes.dart';
 
 void main() {
@@ -18,18 +21,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ConnectivityServices _con = ConnectivityServices();
   @override
   void initState() {
+    _con.startConnectionStream(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AppProvider()),
         ],
-        child: MaterialApp(
+        child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Shake Shack',
           theme: theme(),

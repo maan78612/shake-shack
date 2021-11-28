@@ -134,9 +134,9 @@ class ProductCard extends StatelessWidget {
               top: -getProportionateScreenWidth(55),
               child: Image.network(
                 product.image ?? "",
-                fit: BoxFit.cover,
-                width: getProportionateScreenWidth(190),
-                height: getProportionateScreenWidth(190),
+                fit: BoxFit.contain,
+                width: getProportionateScreenWidth(156),
+                height: getProportionateScreenWidth(156),
               ),
             ),
           ],

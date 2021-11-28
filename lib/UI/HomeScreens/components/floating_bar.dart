@@ -49,8 +49,8 @@ class FloatingBar extends StatelessWidget {
                                 var cartData = cartProducts[index];
                                 return index < 3
                                     ? Container(
-                                        height: getProportionateScreenWidth(35),
-                                        width: getProportionateScreenWidth(35),
+                                        height: getProportionateScreenWidth(37),
+                                        width: getProportionateScreenWidth(37),
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 width: 2,
@@ -59,11 +59,11 @@ class FloatingBar extends StatelessWidget {
                                             shape: BoxShape.circle,
                                             color: Colors.transparent),
                                         child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4),
-                                          child: Image.asset(
+                                          padding: const EdgeInsets.all(2),
+                                          child: Image.network(
                                             cartData.product.image ?? "",
                                             alignment: Alignment.center,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       )

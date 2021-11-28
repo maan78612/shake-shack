@@ -49,15 +49,15 @@ class ItemCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: getProportionateScreenWidth(65),
-                  width: getProportionateScreenWidth(65),
+                  height: getProportionateScreenWidth(67),
+                  width: getProportionateScreenWidth(67),
                   decoration: BoxDecoration(
                       border: Border.all(
                           width: 2, color: AppConfig.colors.borderColor),
                       shape: BoxShape.circle,
                       color: Colors.transparent),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.all(4),
                     child: Image.network(
                       cartData.product.image ?? "",
                       alignment: Alignment.center,

@@ -10,8 +10,9 @@ import 'header.dart';
 class ApiRequests {
   Future getApi({required String url}) async {
     bool isConnected = await checkInternet();
-    if (!isConnected) {
+    if (isConnected == false) {
       ShowMessageCustom.inDialog("No internet Connection", true);
+      // print("no internet");
       return false;
     }
     try {
@@ -54,8 +55,8 @@ class ApiRequests {
         print('connected');
         return true;
       }
-    } on SocketException catch (_) {
-      print('not connected');
+    } on SocketException catch (e) {
+      print(e.message);
       return false;
     }
     return false;
